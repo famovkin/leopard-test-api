@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const keyboardSchema = new mongoose.Schema({
   date: {
-    type: Date,
+    type: String,
     required: true,
   },
   model: {
@@ -16,7 +16,6 @@ const keyboardSchema = new mongoose.Schema({
   image: {
     data: Buffer,
     contentType: String,
-    required: true,
   },
   color: {
     type: String,
