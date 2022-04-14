@@ -54,7 +54,7 @@ module.exports.login = (req, res, next) => {
           if (!matched) {
             throw new AuthError('Неверные почта или пароль');
           }
-          const token = jwt.sign({ _id: user._doc._id }, 'dev-secret', {
+          const token = jwt.sign({ _id: user._doc._id }, process.env.JWT_SECRET, {
             expiresIn: '1d',
           });
           res.send({ token });
