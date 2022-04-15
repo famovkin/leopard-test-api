@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const routes = require('./routes');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 const { SERVER_ERROR_CODE } = require('./utils/constants');
 const app = express();
 
@@ -23,7 +23,7 @@ app.use((err, req, res, next) => {
 
 const startApp = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URL);
+    await mongoose.connect(process.env.DATABASE_URL);
     await app.listen(PORT, () =>
       console.log(`Backend server is running on ${PORT} port`)
     );
