@@ -77,3 +77,12 @@ module.exports.editKeyboard = async (req, res, next) => {
       : next(err);
   }
 };
+
+module.exports.getKeyboard = async (req, res, next) => {
+  try {
+    const keyboard = await checkExistKeyboard(req);
+    res.send(keyboard);
+  } catch (err) {
+    next(new BadRequestError('Произошла ошибка'));
+  }
+};

@@ -7,10 +7,12 @@ const {
   addKeyboard,
   deleteKeyboard,
   editKeyboard,
+  getKeyboard,
 } = require('../controllers/keyboards');
 
 keyboardsRoutes.get('/', getKeyboards);
 keyboardsRoutes.post('/', addKeyboard);
+keyboardsRoutes.get('/:id', getKeyboard);
 keyboardsRoutes.patch('/:id', editKeyboard);
 keyboardsRoutes.delete('/:id', deleteKeyboard);
 
