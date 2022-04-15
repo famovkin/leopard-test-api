@@ -14,8 +14,8 @@ const keyboardSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    data: Buffer,
-    contentType: String,
+    type: String,
+    required: true,
   },
   color: {
     type: String,
@@ -34,6 +34,10 @@ const keyboardSchema = new mongoose.Schema({
     ref: 'user',
     required: true,
   },
+  cloudinary_id: {
+    type: String,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model('keyboard', keyboardSchema);

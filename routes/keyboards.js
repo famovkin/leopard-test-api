@@ -1,6 +1,6 @@
 const express = require('express');
 
-const uploadMiddleware = require('../middlewares/uploadImage');
+const upload = require('../middlewares/multer');
 const keyboardsRoutes = express.Router();
 
 const {
@@ -11,8 +11,8 @@ const {
 } = require('../controllers/keyboards');
 
 keyboardsRoutes.get('/', getKeyboards);
-keyboardsRoutes.post('/', express.json(), uploadMiddleware.single("keyboardImage"), addKeyboard);
-keyboardsRoutes.patch('/:id', express.json(), uploadMiddleware.single("keyboardImage"), editKeyboard);
+keyboardsRoutes.post('/', express.json(), upload.single("keyboardImage"), addKeyboard);
+keyboardsRoutes.patch('/:id', express.json(), upload.single("keyboardImage"), editKeyboard);
 keyboardsRoutes.delete('/:id', deleteKeyboard);
 
 
