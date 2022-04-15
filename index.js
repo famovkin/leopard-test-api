@@ -9,6 +9,8 @@ const { SERVER_ERROR_CODE } = require('./utils/constants');
 const app = express();
 
 app.use(cors());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use('/api', routes);
 app.use((err, req, res, next) => {
   const { statusCode = SERVER_ERROR_CODE, message } = err;

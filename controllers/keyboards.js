@@ -24,7 +24,7 @@ module.exports.getKeyboards = async (req, res, next) => {
 
 module.exports.addKeyboard = async (req, res, next) => {
   try {
-    const uploadResult = await cloudinary.uploader.upload(req.file.path);
+    const uploadResult = await cloudinary.uploader.upload(req.body.image);
     const newKeyboard = await Keyboard.create({
       ...req.body,
       image: uploadResult.secure_url,
@@ -57,7 +57,7 @@ module.exports.editKeyboard = async (req, res, next) => {
   try {
     const keyboard = await checkExistKeyboard(req);
     await cloudinary.uploader.destroy(keyboard.cloudinary_id);
-    const uploadResult = await cloudinary.uploader.upload(req.file.path);
+    const uploadResult = await cloudinary.uploader.upload(req.body.image);
     const updatedKeyboardInfo = await Keyboard.findByIdAndUpdate(
       req.params.id,
       {
