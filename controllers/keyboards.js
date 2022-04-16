@@ -56,14 +56,17 @@ module.exports.deleteKeyboard = async (req, res, next) => {
 module.exports.editKeyboard = async (req, res, next) => {
   try {
     const keyboard = await checkExistKeyboard(req);
-    await cloudinary.uploader.destroy(keyboard.cloudinary_id);
-    const uploadResult = await cloudinary.uploader.upload(req.body.image);
+    let dateImage = null;
+    if (req.body.image) {
+      await cloudinary.uploader.destroy(keyboard.cloudinary_id);
+      const { secure_url, public_id } = await cloudinary.uploader.upload(req.body.image);
+      dataImage = { secure_url, public_id };
+    }
     const updatedKeyboardInfo = await Keyboard.findByIdAndUpdate(
       req.params.id,
       {
         ...req.body,
-        image: uploadResult.secure_url,
-        cloudinary_id: uploadResult.public_id,
+        ...dateImage,
       },
       {
         new: true,
