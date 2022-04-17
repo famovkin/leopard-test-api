@@ -58,7 +58,6 @@ module.exports.editKeyboard = async (req, res, next) => {
     const keyboard = await checkExistKeyboard(req);
     let dateImage = null;
     if (req.body.image) {
-      await cloudinary.uploader.destroy(keyboard.cloudinary_id);
       const { secure_url, public_id } = await cloudinary.uploader.upload(req.body.image);
       dataImage = { secure_url, public_id };
     }
@@ -74,6 +73,7 @@ module.exports.editKeyboard = async (req, res, next) => {
       }
     );
     res.send(updatedKeyboardInfo);
+    cloudinary.uploader.destroy(keyboard.cloudinary_id);
   } catch (err) {
     err.name === 'ValidationError'
       ? next(new BadRequestError(err.message))
