@@ -15,7 +15,7 @@ const checkExistKeyboard = async (req) => {
 
 module.exports.getKeyboards = async (req, res, next) => {
   try {
-    const keyboards = await Keyboard.find({ owner: req.user._id });
+    const keyboards = await Keyboard.find({});
     res.send(keyboards);
   } catch (err) {
     next(new BadRequestError('Произошла ошибка'));
